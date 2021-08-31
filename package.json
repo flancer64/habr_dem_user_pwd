@@ -16,6 +16,5 @@
   "repository": "github:flancer64/habr_dem_user_pwd",
   "dependencies": {
     "@teqfw/db": "*"
-  },
-  "devDependencies": {}
+  }
 }
