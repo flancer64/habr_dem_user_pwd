@@ -1,7 +1,49 @@
 {
-  "package": {
-    "app": {
-      "entity": {}
+  "entity": {
+    "login": {
+      "comment": "User registry with login information.",
+      "attr": {
+        "login_id": {"type": "id"},
+        "name": {
+          "comment": "Unique login name.",
+          "type": "string"
+        },
+        "password_hash": {
+          "type": "string"
+        }
+      },
+      "index": {
+        "uq_name": {"type": "unique", "attrs": ["name"]}
+      }
+    },
+    "session": {
+      "comment": "Registry for opened sessions.",
+      "attr": {
+        "session_id": {
+          "comment": "Unique ID for user session.",
+          "type": "string"
+        },
+        "login_ref": {
+          "type": "ref"
+        },
+        "date_created": {
+          "comment": "Date-time for session registration.",
+          "type": "datetime",
+          "default": "current"
+        }
+      },
+      "index": {
+        "PK": {"type": "primary", "attrs": ["session_id"]}
+      },
+      "relation": {
+        "user": {
+          "attrs": ["login_ref"],
+          "ref": {
+            "path": "/login",
+            "attrs": ["login_id"]
+          }
+        }
+      }
     }
   }
 }
